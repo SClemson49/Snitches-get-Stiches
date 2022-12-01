@@ -6,7 +6,8 @@ The 'enemies' will be moving blocks or walls, moving vertically that will kill t
 
 I plan on using canvas to make the game. 
 
-image.png
+'WIREFRAME'
+
 
 
 MVP -- player one dodges enemies using WASD to reach the snitch at the end. 
@@ -16,7 +17,9 @@ MVP -- player one dodges enemies using WASD to reach the snitch at the end.
     -- score is based on time + snitch's caught (ex. 5.00mins + 10 = 150 pts)
 
 
-
+-- potential harships-- 
+    getting the score counter right
+    producing more enemies each round
 
     streeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeetch goals:
         -- have the enemies start moving randomly
