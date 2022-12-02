@@ -13,5 +13,8 @@ canvas {
 #container {
     max-width: 100em;
     margin: 0 auto;
-    
+    padding: 1em;
+    display: grid;
 }
+
+  
