@@ -8,7 +8,7 @@ const playerOne = document.querySelector('#bottom-left')
 canvas.setAttribute('height', getComputedStyle(canvas)['height'])
 canvas.setAttribute('width', getComputedStyle(canvas)['width'])
 
-console.log(startBtn, resetBtn, canvas, timer)
+// console.log(startBtn, resetBtn, canvas, timer)
 
 
 const context = canvas.getContext('2d')
@@ -39,16 +39,43 @@ class Player {
         context.fillRect(this.x, this.y, this.width, this.height)
     }
 }
+class Enemy {
+    constructor(x, y, width, height, color){
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+        this.color = color
+    }
+    render() {
+        context.fillStyle = this.color
+        context.fillRect(this.x, this.y, this.width, this.height)
+    }
+}
+class Goal {
+    constructor(x, y, width, height, color){
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+        this.color = color
+    }
+    render() {
+        context.fillStyle = this.color
+        context.fillRect(this.x, this.y, this.width, this.height)
+    }
+}
  // player units
 const gameLoopInterval = setInterval(gameLoop, 60)
 const players = new Player(50, 350, 50, 50, 'blue')
-const enemy = new Player(500, 350, 50, 50, 'red')
+const enemy = new Enemy(500, 350, 50, 50, 'red')
+const goal = new Goal(1500, 350, 15, 15, 'yellow')
 const pressedKeys = {}
 
 // start button - timer
 
 startBtn.addEventListener('click', function (){
- var counter = 500;
+ var counter = 5;
  setInterval(function(){
     counter --;
         if (counter >= 0){
@@ -56,14 +83,21 @@ startBtn.addEventListener('click', function (){
         }
         if (counter === 0) {
             clearInterval(counter)
-            timer.innerText = ('you lose! out of time')
-        if (detectHit = true){
-            clearInterval(counter)
-            timer.innerText = ('Game over! player has died')
-        }
+            timer.innerText = ('Out of Time!')
         }
  }, 1000);
 })
+resetBtn.addEventListener("click", function(){
+// console.log('reset btn clicked')
+
+})
+
+
+
+
+    
+
+// enemy movement
 
 
 // user input to move
@@ -114,12 +148,23 @@ function gameLoop(){
         console.log('game over')
         // players.alive = false
         playerOne.innerText = "Player one has died"
+        timer.innerText = "YOU DIED"
+    }
+    if (detectWin()){
+        //end game
+        console.log('WINNER')
+        // players.alive = false
+        playerOne.innerText = "Player one has caught the Snitch"
+        timer.innerText = "NEXT ROUND"
     }
   
     players.render()
     
     enemy.render()
+
+    goal.render()
 }
+// enemy movement
 
 
 // collision detection
@@ -131,7 +176,14 @@ function detectHit(){
     const top = players.y + players.height >= enemy.y
     const bottom = players.y <= enemy.y + enemy.height
 return left && right && top && bottom
+
     // console.log(left, right, left && right)
     // console.log(left, right, top, bottom)
 }
-
+function detectWin(){
+    const left = players.x + players.width >= goal.x
+    const right = players.x <= goal.x + goal.width
+    const top = players.y + players.height >= goal.y
+    const bottom = players.y <= goal.y + goal.height
+return left && right && top && bottom
+}
