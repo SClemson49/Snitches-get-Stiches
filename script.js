@@ -3,6 +3,7 @@ const startBtn = document.querySelector('#start')
 const resetBtn = document.querySelector('#reset')
 const canvas = document.querySelector('canvas')
 const timer = document.querySelector('#top-right')
+const playerOne = document.querySelector('#bottom-left')
 
 canvas.setAttribute('height', getComputedStyle(canvas)['height'])
 canvas.setAttribute('width', getComputedStyle(canvas)['width'])
@@ -40,7 +41,9 @@ class Player {
 }
  // player units
 const gameLoopInterval = setInterval(gameLoop, 60)
-const playerOne = new Player(50, 350, 50, 50, 'blue')
+const players = new Player(50, 350, 50, 50, 'blue')
+const enemy = new Player(500, 350, 50, 50, 'red')
+
 
 
 
@@ -50,16 +53,16 @@ function handleMovement(e) {
     // console.log(e)
     switch (e.key){
         case('w'):
-            playerOne.y -= speed
+            players.y -= speed
             break
         case('s'):
-            playerOne.y += speed
+            players.y += speed
             break
         case('a'):
-            playerOne.x -= speed
+            players.x -= speed
             break
         case('d'):
-            playerOne.x += speed
+            players.x += speed
             break
 
     }
@@ -70,8 +73,31 @@ document.addEventListener('keydown', handleMovement)
 
 function gameLoop(){
     context.clearRect(0,0, canvas.width, canvas.height)
-    playerOne.render()
+
+    // detect hit
+    if (detectHit()){
+        //end game
+        console.log('game over')
+        // players.alive = false
+        playerOne.innerText = "Player one has died"
+    }
+  
+    players.render()
+    
+    enemy.render()
 }
 
 
 // collision detection
+// axis aligned bounding box collision detection. AABB collision detection
+
+function detectHit(){
+    const left = players.x + players.width >= enemy.x
+    const right = players.x <= enemy.x + enemy.width
+    const top = players.y + players.height >= enemy.y
+    const bottom = players.y <= enemy.y + enemy.height
+return left && right && top && bottom
+    // console.log(left, right, left && right)
+    // console.log(left, right, top, bottom)
+}
+
