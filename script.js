@@ -43,36 +43,70 @@ class Player {
 const gameLoopInterval = setInterval(gameLoop, 60)
 const players = new Player(50, 350, 50, 50, 'blue')
 const enemy = new Player(500, 350, 50, 50, 'red')
+const pressedKeys = {}
 
+// start button - timer
 
+startBtn.addEventListener('click', function (){
+ var counter = 500;
+ setInterval(function(){
+    counter --;
+        if (counter >= 0){
+            timer.innerText = counter;
+        }
+        if (counter === 0) {
+            clearInterval(counter)
+            timer.innerText = ('you lose! out of time')
+        if (detectHit = true){
+            clearInterval(counter)
+            timer.innerText = ('Game over! player has died')
+        }
+        }
+ }, 1000);
+})
 
 
 // user input to move
-function handleMovement(e) {
-    const speed = 5
+function handleMovement() {
+    const speed = 7
     // console.log(e)
-    switch (e.key){
-        case('w'):
-            players.y -= speed
-            break
-        case('s'):
-            players.y += speed
-            break
-        case('a'):
-            players.x -= speed
-            break
-        case('d'):
-            players.x += speed
-            break
-
+    // switch (e.key){
+    //     case('w'):
+    //         players.y -= speed
+    //         break
+    //     case('s'):
+    //         players.y += speed
+    //         break
+    //     case('a'):
+    //         players.x -= speed
+    //         break
+    //     case('d'):
+    //         players.x += speed
+    //         break
+    if (pressedKeys.w) {
+        players.y -= speed
+    }
+    if (pressedKeys.s) {
+        players.y += speed
+    }
+    if (pressedKeys.a) {
+        players.x -= speed
+    }
+    if (pressedKeys.d) {
+        players.x += speed
     }
 }
-document.addEventListener('keydown', handleMovement)
+
+document.addEventListener('keydown', e => pressedKeys[e.key] = true)
+document.addEventListener('keyup', e => pressedKeys[e.key] = false)
 
 //gameLoop -- GAME LOGIC --
 
 function gameLoop(){
     context.clearRect(0,0, canvas.width, canvas.height)
+    // if (detectHit(players, enemy)){
+        handleMovement()
+
 
     // detect hit
     if (detectHit()){
