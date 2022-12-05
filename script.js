@@ -14,10 +14,8 @@ canvas.setAttribute('width', getComputedStyle(canvas)['width'])
 
 // console.log(startBtn, resetBtn, canvas, timer)
 
-
 const context = canvas.getContext('2d')
 // console.log(context)
-
 
 // game objects classes
 class Player {
@@ -74,13 +72,20 @@ class Goal {
 
  // player units
 const gameLoopInterval = setInterval(gameLoop, 30)
-const player = new Player(5, 100, 50, 50, 'blue')
 const goal = new Goal(1500, 125, 15, 15, 'yellow')
 
-let playerTurn = 'playerOne'
+const player = new Player(5, 100, 50, 50, 'blue')
+let currentPlayer = 'p1'
+
+function switchPlayer(currentPlayer) {
+    if (currentPlayer === 'p1') {
+      player = 'p2';
+    } else {
+      player = 'p1';
+    }
+}
 
 
-const pressedKeys = {}
 
 // start button - timer
 
@@ -88,7 +93,8 @@ const pressedKeys = {}
 
 
 startBtn.addEventListener('click', function (){
-    
+
+
  var counter = 5; //CHANGE ROUND TIMER
  setInterval(function(){
             counter --
@@ -113,7 +119,7 @@ resetBtn.addEventListener("click", function(){
 
     
 
-
+const pressedKeys = {}
 
 // user input to move
 function handleMovement() {
@@ -147,10 +153,10 @@ function gameLoop(){
     context.clearRect(0,0, canvas.width, canvas.height)
 
         handleMovement()
-
+let currentPlayer = player
     
     // detect hit
-    if (detectHit(enemy)){
+    if (detectHit()){
         gameActive = false
         //end game
         console.log('game over')
@@ -171,23 +177,19 @@ function gameLoop(){
 
     
 
-    player.render()
-    
+    player.render()    
     enemy.render()
-
     goal.render()
 
 
-    }    
+    }   
 
-
-// player turns
-
- 
-// enemy movement
+//enemies
 const enemy = new Enemy(100  ,-100, 50, 50, 'red',5) // enemy speed
 
 const updateEnemy = function(){
+
+   
     requestAnimationFrame(updateEnemy)
     enemy.update();
   
@@ -205,7 +207,6 @@ function detectHit(){
     const bottom = player.y <= enemy.y + enemy.height
 return left && right && top && bottom 
 }
-
 
 function detectWin(){
     const left = player.x + player.width >= goal.x
