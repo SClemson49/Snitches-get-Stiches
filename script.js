@@ -53,12 +53,10 @@ class Enemy {
     update(){
         // this.x += this.dx; // move left right
         this.y += this.dy;
-    }
-
-
        
-    
+    }      
 }
+
 class Goal {
     constructor(x, y, width, height, color){
         this.x = x
@@ -72,24 +70,21 @@ class Goal {
         context.fillRect(this.x, this.y, this.width, this.height)
     }
 }
+
+
  // player units
 const gameLoopInterval = setInterval(gameLoop, 30)
-const playerOne = new Player(5, 350, 50, 50, 'blue')
-const playerTwo = new Player(10, 350, 50, 50, 'green')
-const enemy = new Enemy(100, 0, 50, 50, 'red', 10) // enemy speed
+const player = new Player(5, 100, 50, 50, 'blue')
+const goal = new Goal(1500, 125, 15, 15, 'yellow')
 
-const updateEnemy = function(){
-    requestAnimationFrame(updateEnemy)
-    enemy.update();
-  
-}
-updateEnemy()
-const goal = new Goal(1500, 350, 15, 15, 'yellow')
+let playerTurn = 'playerOne'
+
+
 const pressedKeys = {}
 
 // start button - timer
 
-  
+
 
 
 startBtn.addEventListener('click', function (){
@@ -110,6 +105,7 @@ resetBtn.addEventListener("click", function(){
 // console.log('reset btn clicked')
 
 
+
 })
 
 
@@ -121,38 +117,31 @@ resetBtn.addEventListener("click", function(){
 
 // user input to move
 function handleMovement() {
-    const speed = 10
+    if (!gameActive){
+        return}
+    
+const speed = 10
     if (pressedKeys.w) {
-        playerOne.y -= speed
+        player.y -= speed
     }
     if (pressedKeys.s) {
-        playerOne.y += speed
+        player.y += speed
     }
     if (pressedKeys.a) {
-        playerOne.x -= speed
+        player.x -= speed
     }
     if (pressedKeys.d) {
-        playerOne.x += speed
-    }
-    if (pressedKeys.i) {
-        playerTwo.y -= speed
-    }
-    if (pressedKeys.k) {
-        playerTwo.y += speed
-    }
-    if (pressedKeys.j) {
-        playerTwo.x -= speed
-    }
-    if (pressedKeys.l) {
-        playerTwo.x += speed
+        player.x += speed
     }
 }
+
 
 
 document.addEventListener('keydown', e => pressedKeys[e.key] = true)
 document.addEventListener('keyup', e => pressedKeys[e.key] = false)
 
 //gameLoop -- GAME LOGIC --
+let gameActive = true
 
 function gameLoop(){
     context.clearRect(0,0, canvas.width, canvas.height)
@@ -161,85 +150,68 @@ function gameLoop(){
 
     
     // detect hit
-    if (detectHitOne(enemy)){
+    if (detectHit(enemy)){
+        gameActive = false
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
+        
+        
     }
-    if (detectWinOne()){
+    if (detectWin()){
+        gameActive = false
         //end game
         console.log('WINNER')
         playerOneName.innerText = "Player one has caught the Snitch"
         timer.innerText = "NEXT ROUND"
        }
+
         
 
     
-    // PLAYER 2
-    
-    playerTwo.render()
-    if (detectHitTwo()){
-        //end game
-        console.log('game over')
-        playerTwoName.innerText = "Player Two has died"
-        timer.innerText = "YOU DIED"
-    }
-    if (detectWinTwo()){
-        //end game
-        console.log('WINNER')
-        playerTwoName.innerText = "Player Two has caught the Snitch"
-        timer.innerText = "NEXT ROUND"
-    }
-  
-    playerOne.render()
+
+    player.render()
     
     enemy.render()
 
     goal.render()
-}
+
+
+    }    
 
 
 // player turns
 
  
 // enemy movement
+const enemy = new Enemy(100  ,-100, 50, 50, 'red',5) // enemy speed
+
+const updateEnemy = function(){
+    requestAnimationFrame(updateEnemy)
+    enemy.update();
+  
+}
+updateEnemy()
 
 
 // collision detection
 // axis aligned bounding box collision detection. AABB collision detection
 
-function detectHitOne(){
-    const left = playerOne.x + playerOne.width >= enemy.x
-    const right = playerOne.x <= enemy.x + enemy.width
-    const top = playerOne.y + playerOne.height >= enemy.y
-    const bottom = playerOne.y <= enemy.y + enemy.height
+function detectHit(){
+    const left = player.x + player.width >= enemy.x
+    const right = player.x <= enemy.x + enemy.width
+    const top = player.y + player.height >= enemy.y
+    const bottom = player.y <= enemy.y + enemy.height
 return left && right && top && bottom 
 }
 
-    // console.log(left, right, left && right)
-    // console.log(left, right, top, bottom)
 
-function detectWinOne(){
-    const left = playerOne.x + playerOne.width >= goal.x
-    const right = playerOne.x <= goal.x + goal.width
-    const top = playerOne.y + playerOne.height >= goal.y
-    const bottom = playerOne.y <= goal.y + goal.height
-return left && right && top && bottom
-}
-//PLAYER TWO
-function detectWinTwo(){
-    const left = playerTwo.x + playerTwo.width >= goal.x
-    const right = playerTwo.x <= goal.x + goal.width
-    const top = playerTwo.y + playerTwo.height >= goal.y
-    const bottom = playerTwo.y <= goal.y + goal.height
+function detectWin(){
+    const left = player.x + player.width >= goal.x
+    const right = player.x <= goal.x + goal.width
+    const top = player.y + player.height >= goal.y
+    const bottom = player.y <= goal.y + goal.height
 return left && right && top && bottom
 }
 
-function detectHitTwo(){
-    const leftTwo = playerTwo.x + playerTwo.width >= enemy.x
-    const rightTwo = playerTwo.x <= enemy.x + enemy.width
-    const topTwo = playerTwo.y + playerTwo.height >= enemy.y
-    const bottomTwo = playerTwo.y <= enemy.y + enemy.height
-return leftTwo && rightTwo && topTwo && bottomTwo
-}
