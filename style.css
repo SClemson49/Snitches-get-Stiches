@@ -6,17 +6,10 @@ body{
 
 canvas {
     background-color: lightgrey;
-    width: 100%;
-    height: 100;
+ 
+
     border: solid black 5px;
 
-}
-
-#container {
-    max-width: 100em;
-    margin: 0 auto;
-    padding: 1em;
-    display: grid;
 }
 
 .enemy {
