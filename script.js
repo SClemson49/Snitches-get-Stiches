@@ -88,8 +88,8 @@ const player2 = new Player(10, 125, 50, 50, 'green')
 
 
 startBtn.addEventListener('click', function (){
-
-
+gameActive = true
+ switchPlayer()
  var counter = 5; //CHANGE ROUND TIMER
  setInterval(function(){
             counter --
@@ -118,8 +118,8 @@ const pressedKeys = {}
 
 // user input to move
 function handleMovement() {
-    if (!gameActive){
-        return}
+    // if (!gameActive){
+    //     return}
     
 const speed = 10
     if (pressedKeys.w) {
@@ -152,9 +152,11 @@ let currentPlayer = 'p1'
 
 function switchPlayer(currentPlayer) {
     if (currentPlayer === 'p1') {
-      player2 = 'p2';
+      currentPlayer = 'p2';
+     
     } else {
-      player1 = 'p1';
+      currentPlayer = 'p1';
+   
     }
 }
 
@@ -164,20 +166,30 @@ document.addEventListener('keyup', e => pressedKeys[e.key] = false)
 //gameLoop -- GAME LOGIC --
 let gameActive = true
 
+   if (currentPlayer === 'p1') {  
+            context.clearRect(player1.x, player1.y, player1.width, player1.height)
+              player2.render()
+          } else {
+            context.clearRect(player2.x, player2.y, player2.width, player2.height)
+              player1.render()
+          }
+    // player2.render()   
 function gameLoop(){
     context.clearRect(0,0, canvas.width, canvas.height)
-
+    player1.render() 
         handleMovement()
 
-    
+  
     // detect hit
     if (detectHit0()){
-        gameActive = false
+        // gameActive = false
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        
+       switchPlayer(currentPlayer)
+
+        console.log(currentPlayer)
         
     }
     if (detectHit1()){
@@ -186,7 +198,7 @@ function gameLoop(){
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        
+        switchPlayer()
         
     }
     if (detectHit2()){
@@ -195,7 +207,7 @@ function gameLoop(){
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        
+        switchPlayer()
         
     }
     if (detectHit3()){
@@ -204,7 +216,7 @@ function gameLoop(){
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        
+        switchPlayer()
         
     }
     if (detectHit4()){
@@ -213,7 +225,7 @@ function gameLoop(){
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        
+        switchPlayer()
         
     }
     if (detectHit5()){
@@ -222,7 +234,7 @@ function gameLoop(){
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        
+        switchPlayer()
         
     }
     if (detectHit6()){
@@ -231,7 +243,7 @@ function gameLoop(){
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        
+        switchPlayer()
         
     }
     if (detectHit7()){
@@ -240,7 +252,7 @@ function gameLoop(){
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        
+        switchPlayer()
         
     }
     if (detectHit8()){
@@ -249,7 +261,7 @@ function gameLoop(){
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        
+        switchPlayer()
         
     }
     if (detectHit9()){
@@ -258,7 +270,7 @@ function gameLoop(){
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        
+        switchPlayer()
         
     }
 
@@ -278,7 +290,7 @@ function gameLoop(){
 
     
 
-    player1.render()    
+    // player1.render()    
     // player2.render()    
     enemy0.render()
     enemy1.render()
@@ -296,14 +308,14 @@ function gameLoop(){
 }
 
 //enemies
-const enemy0 = new Enemy(100 ,-500, 50, 150, 'red',3) // enemy speed
+const enemy0 = new Enemy(100 ,-300, 50, 150, 'red',4) // enemy speed
 const enemy1 = new Enemy(250 ,-100, 50, 50, 'black',3) // enemy speed
-const enemy2 = new Enemy(400 ,-200, 50, 350, 'white',3) // enemy speed
+const enemy2 = new Enemy(400 ,-200, 50, 350, 'white',2) // enemy speed
 const enemy3 = new Enemy(550 ,-500, 50, 150, 'pink',3) // enemy speed
-const enemy4 = new Enemy(750 ,-500, 50, 50, 'purple',3) // enemy speed
-const enemy5 = new Enemy(900 ,-500, 50, 150, 'orange',3) // enemy speed
+const enemy4 = new Enemy(750 ,-500, 50, 100, 'purple',3) // enemy speed
+const enemy5 = new Enemy(900 ,-550, 50, 150, 'orange',3) // enemy speed
 const enemy6 = new Enemy(1050 ,-500, 50, 50, 'yellow',3) // enemy speed
-const enemy7 = new Enemy(1050 ,-100, 50, 50, 'cyan',3) // enemy speed
+const enemy7 = new Enemy(1100 ,-1000, 50, 75, 'cyan',2) // enemy speed
 const enemy8 = new Enemy(1050 ,-3000, 50, 350, 'lightpurple',3) // enemy speed
 const enemy9 = new Enemy(1050 ,-1000, 50, 350, 'gray',3) // enemy speed
 
