@@ -74,18 +74,11 @@ class Goal {
 
  // player units
 const gameLoopInterval = setInterval(gameLoop, 30)
-const goal = new Goal(1400, 90, 15, 15, 'yellow')
+const goal = new Goal(1400, 135, 15, 15, 'yellow')
 
-const player = new Player(5, 75, 50, 50, 'blue')
-let currentPlayer = 'p1'
+const player1 = new Player(10, 125, 50, 50, 'blue')
+const player2 = new Player(10, 125, 50, 50, 'green')
 
-function switchPlayer(currentPlayer) {
-    if (currentPlayer === 'p1') {
-      player = 'p2';
-    } else {
-      player = 'p1';
-    }
-}
 
 
 
@@ -130,20 +123,40 @@ function handleMovement() {
     
 const speed = 10
     if (pressedKeys.w) {
-        player.y -= speed
+        player1.y -= speed
     }
     if (pressedKeys.s) {
-        player.y += speed
+        player1.y += speed
     }
     if (pressedKeys.a) {
-        player.x -= speed
+        player1.x -= speed
     }
     if (pressedKeys.d) {
-        player.x += speed
+        player1.x += speed
+    }
+    if (pressedKeys.w) {
+        player2.y -= speed
+    }
+    if (pressedKeys.s) {
+        player2.y += speed
+    }
+    if (pressedKeys.a) {
+        player2.x -= speed
+    }
+    if (pressedKeys.d) {
+        player2.x += speed
     }
 }
 
+let currentPlayer = 'p1'
 
+function switchPlayer(currentPlayer) {
+    if (currentPlayer === 'p1') {
+      player2 = 'p2';
+    } else {
+      player1 = 'p1';
+    }
+}
 
 document.addEventListener('keydown', e => pressedKeys[e.key] = true)
 document.addEventListener('keyup', e => pressedKeys[e.key] = false)
@@ -158,7 +171,7 @@ function gameLoop(){
 
     
     // detect hit
-    if (detectHit()){
+    if (detectHit0()){
         gameActive = false
         //end game
         console.log('game over')
@@ -167,20 +180,107 @@ function gameLoop(){
         
         
     }
-    if (detectWin()){
+    if (detectHit1()){
+        gameActive = false
+        //end game
+        console.log('game over')
+        playerOneName.innerText = "Player one has died"
+        timer.innerText = "YOU DIED" 
+        
+        
+    }
+    if (detectHit2()){
+        gameActive = false
+        //end game
+        console.log('game over')
+        playerOneName.innerText = "Player one has died"
+        timer.innerText = "YOU DIED" 
+        
+        
+    }
+    if (detectHit3()){
+        gameActive = false
+        //end game
+        console.log('game over')
+        playerOneName.innerText = "Player one has died"
+        timer.innerText = "YOU DIED" 
+        
+        
+    }
+    if (detectHit4()){
+        gameActive = false
+        //end game
+        console.log('game over')
+        playerOneName.innerText = "Player one has died"
+        timer.innerText = "YOU DIED" 
+        
+        
+    }
+    if (detectHit5()){
+        gameActive = false
+        //end game
+        console.log('game over')
+        playerOneName.innerText = "Player one has died"
+        timer.innerText = "YOU DIED" 
+        
+        
+    }
+    if (detectHit6()){
+        gameActive = false
+        //end game
+        console.log('game over')
+        playerOneName.innerText = "Player one has died"
+        timer.innerText = "YOU DIED" 
+        
+        
+    }
+    if (detectHit7()){
+        gameActive = false
+        //end game
+        console.log('game over')
+        playerOneName.innerText = "Player one has died"
+        timer.innerText = "YOU DIED" 
+        
+        
+    }
+    if (detectHit8()){
+        gameActive = false
+        //end game
+        console.log('game over')
+        playerOneName.innerText = "Player one has died"
+        timer.innerText = "YOU DIED" 
+        
+        
+    }
+    if (detectHit9()){
+        gameActive = false
+        //end game
+        console.log('game over')
+        playerOneName.innerText = "Player one has died"
+        timer.innerText = "YOU DIED" 
+        
+        
+    }
+
+        
+        
+    
+    if (detectWin1()){
         gameActive = false
         //end game
         console.log('WINNER')
-        playerOneName.innerText = "Player one has caught the Snitch"
+        playerOneName.innerText = "Player One has caught the Snitch"
         timer.innerText = "NEXT ROUND"
        }
+
 
         
 
     
 
-    player.render()    
-    enemy.render()
+    player1.render()    
+    // player2.render()    
+    enemy0.render()
     enemy1.render()
     enemy2.render()
     enemy3.render()
@@ -193,114 +293,225 @@ function gameLoop(){
     goal.render()
 
 
-    }   
+}
 
 //enemies
-const enemy = new Enemy(100  ,-500, 50, 500, 'red',3) // enemy speed
-const enemy1 = new Enemy(50  ,-500, 50, 500, 'green',3) // enemy speed
-const enemy2 = new Enemy(100  ,-500, 50, 500, 'yellow',3) // enemy speed
-const enemy3 = new Enemy(100  ,-500, 50, 500, 'black',3) // enemy speed
-const enemy4 = new Enemy(100  ,-500, 50, 500, 'white',3) // enemy speed
-const enemy5 = new Enemy(100  ,-500, 50, 500, 'pink',3) // enemy speed
-const enemy6 = new Enemy(100  ,-500, 50, 500, 'purple',3) // enemy speed
-const enemy7 = new Enemy(100  ,-500, 50, 500, 'grey',3) // enemy speed
-const enemy8 = new Enemy(100  ,-500, 50, 500, 'cyan',3) // enemy speed
-const enemy9 = new Enemy(100  ,-500, 50, 500, 'darkblue',3) // enemy speed
+const enemy0 = new Enemy(100 ,-500, 50, 150, 'red',3) // enemy speed
+const enemy1 = new Enemy(250 ,-100, 50, 50, 'black',3) // enemy speed
+const enemy2 = new Enemy(400 ,-200, 50, 350, 'white',3) // enemy speed
+const enemy3 = new Enemy(550 ,-500, 50, 150, 'pink',3) // enemy speed
+const enemy4 = new Enemy(750 ,-500, 50, 50, 'purple',3) // enemy speed
+const enemy5 = new Enemy(900 ,-500, 50, 150, 'orange',3) // enemy speed
+const enemy6 = new Enemy(1050 ,-500, 50, 50, 'yellow',3) // enemy speed
+const enemy7 = new Enemy(1050 ,-100, 50, 50, 'cyan',3) // enemy speed
+const enemy8 = new Enemy(1050 ,-3000, 50, 350, 'lightpurple',3) // enemy speed
+const enemy9 = new Enemy(1050 ,-1000, 50, 350, 'gray',3) // enemy speed
 
-
-const updateEnemy = function(){
+const updateEnemy0 = function(){
 
    
-    requestAnimationFrame(updateEnemy)
-    enemy.update();
+    requestAnimationFrame(updateEnemy0)
+    enemy0.update();
   
     if ( (this.y + this.width) > window.width){
     this.dy = -this.dy;
   }
 }
-updateEnemy()
+updateEnemy0()
+
+const updateEnemy1 = function(){
+
+   
+    requestAnimationFrame(updateEnemy1)
+    enemy1.update();
+  
+    if ( (this.y + this.width) > window.width){
+    this.dy = -this.dy;
+  }
+}
+updateEnemy1()
+
+const updateEnemy2 = function(){
+
+   
+    requestAnimationFrame(updateEnemy2)
+    enemy2.update();
+  
+    if ( (this.y + this.width) > window.width){
+    this.dy = -this.dy;
+  }
+}
+updateEnemy2()
+
+const updateEnemy3 = function(){
+
+   
+    requestAnimationFrame(updateEnemy3)
+    enemy3.update();
+  
+    if ( (this.y + this.width) > window.width){
+    this.dy = -this.dy;
+  }
+}
+updateEnemy3()
+
+const updateEnemy4 = function(){
+
+   
+    requestAnimationFrame(updateEnemy4)
+    enemy4.update();
+  
+    if ( (this.y + this.width) > window.width){
+    this.dy = -this.dy;
+  }
+}
+updateEnemy4()
+
+const updateEnemy5 = function(){
+
+   
+    requestAnimationFrame(updateEnemy5)
+    enemy5.update();
+  
+    if ( (this.y + this.width) > window.width){
+    this.dy = -this.dy;
+  }
+}
+updateEnemy5()
+
+const updateEnemy6 = function(){
+
+   
+    requestAnimationFrame(updateEnemy6)
+    enemy6.update();
+  
+    if ( (this.y + this.width) > window.width){
+    this.dy = -this.dy;
+  }
+}
+updateEnemy6()
+
+const updateEnemy7 = function(){
+
+   
+    requestAnimationFrame(updateEnemy7)
+    enemy7.update();
+  
+    if ( (this.y + this.width) > window.width){
+    this.dy = -this.dy;
+  }
+}
+updateEnemy7()
+
+const updateEnemy8 = function(){
+
+   
+    requestAnimationFrame(updateEnemy8)
+    enemy8.update();
+  
+    if ( (this.y + this.width) > window.width){
+    this.dy = -this.dy;
+  }
+}
+updateEnemy8()
+
+const updateEnemy9 = function(){
+
+   
+    requestAnimationFrame(updateEnemy9)
+    enemy9.update();
+  
+    if ( (this.y + this.width) > window.width){
+    this.dy = -this.dy;
+  }
+}
+updateEnemy9()
 
 
 
 // collision detection
 // axis aligned bounding box collision detection. AABB collision detection
 
-function detectHit(){
-    const left = player.x + player.width >= enemy.x
-    const right = player.x <= enemy.x + enemy.width
-    const top = player.y + player.height >= enemy.y
-    const bottom = player.y <= enemy.y + enemy.height
+function detectHit0(){
+    const left = player1.x + player1.width >= enemy0.x
+    const right = player1.x <= enemy0.x + enemy0.width
+    const top = player1.y + player1.height >= enemy0.y
+    const bottom = player1.y <= enemy0.y + enemy0.height
 return left && right && top && bottom 
 }
-// function detectHit(){
-//     const left = player.x + player.width >= enemy1.x
-//     const right = player.x <= enemy1.x + enemy1.width
-//     const top = player.y + player.height >= enemy1.y
-//     const bottom = player.y <= enemy1.y + enemy1.height
-// return left && right && top && bottom 
-// }
-// function detectHit(){
-//     const left = player.x + player.width >= enemy2.x
-//     const right = player.x <= enemy2.x + enemy2.width
-//     const top = player.y + player.height >= enemy2.y
-//     const bottom = player.y <= enemy2.y + enemy2.height
-// return left && right && top && bottom 
-// }
-// function detectHit(){
-//     const left = player.x + player.width >= enemy3.x
-//     const right = player.x <= enemy3.x + enemy3.width
-//     const top = player.y + player.height >= enemy3.y
-//     const bottom = player.y <= enemy3.y + enemy3.height
-// return left && right && top && bottom 
-// }
-// function detectHit(){
-//     const left = player.x + player.width >= enemy4.x
-//     const right = player.x <= enemy4.x + enemy4.width
-//     const top = player.y + player.height >= enemy4.y
-//     const bottom = player.y <= enemy4.y + enemy4.height
-// return left && right && top && bottom 
-// }
-// function detectHit(){
-//     const left = player.x + player.width >= enemy5.x
-//     const right = player.x <= enemy5.x + enemy5.width
-//     const top = player.y + player.height >= enemy5.y
-//     const bottom = player.y <= enemy5.y + enemy5.height
-// return left && right && top && bottom 
-// }
-// function detectHit(){
-//     const left = player.x + player.width >= enemy6.x
-//     const right = player.x <= enemy6.x + enemy6.width
-//     const top = player.y + player.height >= enemy6.y
-//     const bottom = player.y <= enemy6.y + enemy6.height
-// return left && right && top && bottom 
-// }
-// function detectHit(){
-//     const left = player.x + player.width >= enemy7.x
-//     const right = player.x <= enemy7.x + enemy7.width
-//     const top = player.y + player.height >= enemy7.y
-//     const bottom = player.y <= enemy7.y + enemy7.height
-// return left && right && top && bottom 
-// }
-// function detectHit(){
-//     const left = player.x + player.width >= enemy8.x
-//     const right = player.x <= enemy8.x + enemy8.width
-//     const top = player.y + player.height >= enemy8.y
-//     const bottom = player.y <= enemy8.y + enemy8.height
-// return left && right && top && bottom 
-// }
-// function detectHit(){
-//     const left = player.x + player.width >= enemy9.x
-//     const right = player.x <= enemy9.x + enemy9.width
-//     const top = player.y + player.height >= enemy9.y
-//     const bottom = player.y <= enemy9.y + enemy9.height
-// return left && right && top && bottom 
-// }
+function detectHit1(){
+    const left = player1.x + player1.width >= enemy1.x
+    const right = player1.x <= enemy1.x + enemy1.width
+    const top = player1.y + player1.height >= enemy1.y
+    const bottom = player1.y <= enemy1.y + enemy1.height
+return left && right && top && bottom 
+}
+function detectHit2(){
+    const left = player1.x + player1.width >= enemy2.x
+    const right = player1.x <= enemy2.x + enemy2.width
+    const top = player1.y + player1.height >= enemy2.y
+    const bottom = player1.y <= enemy2.y + enemy2.height
+return left && right && top && bottom 
+}
+function detectHit3(){
+    const left = player1.x + player1.width >= enemy3.x
+    const right = player1.x <= enemy3.x + enemy3.width
+    const top = player1.y + player1.height >= enemy3.y
+    const bottom = player1.y <= enemy3.y + enemy3.height
+return left && right && top && bottom 
+}
+function detectHit4(){
+    const left = player1.x + player1.width >= enemy4.x
+    const right = player1.x <= enemy4.x + enemy4.width
+    const top = player1.y + player1.height >= enemy4.y
+    const bottom = player1.y <= enemy4.y + enemy4.height
+return left && right && top && bottom 
+}
+function detectHit5(){
+    const left = player1.x + player1.width >= enemy5.x
+    const right = player1.x <= enemy5.x + enemy5.width
+    const top = player1.y + player1.height >= enemy5.y
+    const bottom = player1.y <= enemy5.y + enemy5.height
+return left && right && top && bottom 
+}
+function detectHit6(){
+    const left = player1.x + player1.width >= enemy6.x
+    const right = player1.x <= enemy6.x + enemy6.width
+    const top = player1.y + player1.height >= enemy6.y
+    const bottom = player1.y <= enemy6.y + enemy6.height
+return left && right && top && bottom 
+}
+function detectHit7(){
+    const left = player1.x + player1.width >= enemy7.x
+    const right = player1.x <= enemy7.x + enemy7.width
+    const top = player1.y + player1.height >= enemy7.y
+    const bottom = player1.y <= enemy7.y + enemy7.height
+return left && right && top && bottom 
+}
+function detectHit8(){
+    const left = player1.x + player1.width >= enemy8.x
+    const right = player1.x <= enemy8.x + enemy8.width
+    const top = player1.y + player1.height >= enemy8.y
+    const bottom = player1.y <= enemy8.y + enemy8.height
+return left && right && top && bottom 
+}
+function detectHit9(){
+    const left = player1.x + player1.width >= enemy9.x
+    const right = player1.x <= enemy9.x + enemy9.width
+    const top = player1.y + player1.height >= enemy9.y
+    const bottom = player1.y <= enemy9.y + enemy9.height
+return left && right && top && bottom 
+}
 
-function detectWin(){
-    const left = player.x + player.width >= goal.x
-    const right = player.x <= goal.x + goal.width
-    const top = player.y + player.height >= goal.y
-    const bottom = player.y <= goal.y + goal.height
+
+
+function detectWin1(){
+    const left = player1.x + player1.width >= goal.x
+    const right = player1.x <= goal.x + goal.width
+    const top = player1.y + player1.height >= goal.y
+    const bottom = player1.y <= goal.y + goal.height
 return left && right && top && bottom
 }
+
+
 
