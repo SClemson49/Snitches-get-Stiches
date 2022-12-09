@@ -27,6 +27,7 @@ class Player {
         this.width = width
         this.height = height
         this.color = color
+        this.isPlaying = false
     }
     render() {
         context.fillStyle = this.color
@@ -77,6 +78,7 @@ const gameLoopInterval = setInterval(gameLoop, 30)
 const goal = new Goal(1400, 135, 15, 15, 'yellow')
 
 const player1 = new Player(10, 125, 50, 50, 'blue')
+player1.isPlaying = true
 const player2 = new Player(10, 125, 50, 50, 'green')
 
 
@@ -89,7 +91,7 @@ const player2 = new Player(10, 125, 50, 50, 'green')
 
 startBtn.addEventListener('click', function (){
 gameActive = true
- switchPlayer()
+//  switchPlayer()
  var counter = 5; //CHANGE ROUND TIMER
  setInterval(function(){
             counter --
@@ -104,7 +106,7 @@ gameActive = true
 })
 resetBtn.addEventListener("click", function(){
 // console.log('reset btn clicked')
-
+clearInterval(gameLoop)
 
 
 })
@@ -150,34 +152,43 @@ const speed = 10
 
 let currentPlayer = 'p1'
 
-function switchPlayer(currentPlayer) {
-    if (currentPlayer === 'p1') {
-      currentPlayer = 'p2';
+// function switchPlayer(currentPlayer) {
+//     if (currentPlayer === 'p1') {
+//       currentPlayer = 'p2';
      
-    } else {
-      currentPlayer = 'p1';
+//     } else {
+//       currentPlayer = 'p1';
    
-    }
-}
+//     }
+// }
 
 document.addEventListener('keydown', e => pressedKeys[e.key] = true)
 document.addEventListener('keyup', e => pressedKeys[e.key] = false)
 
+
+function gameOver(){
+    context.clearInterval.counter
+}
 //gameLoop -- GAME LOGIC --
 let gameActive = true
 
-   if (currentPlayer === 'p1') {  
-            context.clearRect(player1.x, player1.y, player1.width, player1.height)
-              player2.render()
-          } else {
-            context.clearRect(player2.x, player2.y, player2.width, player2.height)
-              player1.render()
-          }
+//    if (currentPlayer === 'p1') {  
+//             context.clearRect(player1.x, player1.y, player1.width, player1.height)
+//               player2.render()
+//           } else {
+//             context.clearRect(player2.x, player2.y, player2.width, player2.height)
+//               player1.render()
+//           }
     // player2.render()   
 function gameLoop(){
     context.clearRect(0,0, canvas.width, canvas.height)
-    player1.render() 
-        handleMovement()
+    if (player1.isPlaying){
+        player1.render()
+    } 
+    if (player2.isPlaying){
+        player2.render()
+    } 
+    handleMovement()
 
   
     // detect hit
@@ -187,7 +198,8 @@ function gameLoop(){
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-       switchPlayer(currentPlayer)
+        player1.isPlaying = !player1.isPlaying
+        player2.isPlaying = !player2.isPlaying
 
         console.log(currentPlayer)
         
