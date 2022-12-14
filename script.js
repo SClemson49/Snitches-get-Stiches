@@ -49,6 +49,7 @@ class Enemy {
     }
     render() {
         context.fillStyle = this.color
+        
         context.fillRect(this.x, this.y, this.width, this.height)
     }
     update(){
@@ -103,12 +104,6 @@ gameActive = true
             timer.innerText = ('Out of Time!')
         }
  }, 1000);
-})
-resetBtn.addEventListener("click", function(){
-// console.log('reset btn clicked')
-clearInterval(gameLoop)
-
-
 })
 
 
@@ -166,9 +161,7 @@ document.addEventListener('keydown', e => pressedKeys[e.key] = true)
 document.addEventListener('keyup', e => pressedKeys[e.key] = false)
 
 
-function gameOver(){
-    context.clearInterval.counter
-}
+
 //gameLoop -- GAME LOGIC --
 let gameActive = true
 
@@ -200,7 +193,7 @@ function gameLoop(){
         timer.innerText = "YOU DIED" 
         player1.isPlaying = !player1.isPlaying
         player2.isPlaying = !player2.isPlaying
-
+        alert('you lose!')
         console.log(currentPlayer)
         
     }
