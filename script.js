@@ -1,4 +1,3 @@
-
 // console.log('linked!')
 const startBtn = document.querySelector('#start')
 const resetBtn = document.querySelector('#reset')
@@ -135,7 +134,7 @@ function gameLoop(){
 
     // detect hit
     if (detectHit0()){
-        clearInterval(gameLoopInterval)
+        gameActive = false
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
@@ -144,7 +143,7 @@ function gameLoop(){
 
     }
     if (detectHit1()){
-        clearInterval(gameLoopInterval)
+        gameActive = false
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
@@ -153,7 +152,7 @@ function gameLoop(){
 
     }
     if (detectHit2()){
-        clearInterval(gameLoopInterval)
+        gameActive = false
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
@@ -162,7 +161,7 @@ function gameLoop(){
 
     }
     if (detectHit3()){
-        clearInterval(gameLoopInterval)
+        gameActive = false
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
@@ -171,7 +170,7 @@ function gameLoop(){
 
     }
     if (detectHit4()){
-        clearInterval(gameLoopInterval)
+        gameActive = false
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
@@ -180,7 +179,7 @@ function gameLoop(){
 
     }
     if (detectHit5()){
-        clearInterval(gameLoopInterval)
+        gameActive = false
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
@@ -189,7 +188,7 @@ function gameLoop(){
 
     }
     if (detectHit6()){
-        clearInterval(gameLoopInterval)
+        gameActive = false
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
@@ -198,7 +197,7 @@ function gameLoop(){
 
     }
     if (detectHit7()){
-        clearInterval(gameLoopInterval)
+        gameActive = false
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
@@ -207,7 +206,7 @@ function gameLoop(){
 
     }
     if (detectHit8()){
-        clearInterval(gameLoopInterval)
+        gameActive = false
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
@@ -216,7 +215,7 @@ function gameLoop(){
 
     }
     if (detectHit9()){
-        clearInterval(gameLoopInterval)
+        gameActive = false
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
@@ -229,7 +228,7 @@ function gameLoop(){
 
 
     if (detectWin1()){
-        clearInterval(gameLoopInterval)
+        gameActive = false
         //end game
         console.log('WINNER')
         playerOneName.innerText = "Player One has caught the Snitch"
@@ -264,9 +263,9 @@ const enemy1 = new Enemy(250 ,-200, 50, 150, 'black',3) // enemy speed
 const enemy2 = new Enemy(400 ,-400, 50, 350, 'white',3) // enemy speed
 const enemy3 = new Enemy(550 ,-500, 50, 150, 'pink',3) // enemy speed
 const enemy4 = new Enemy(750 ,-800, 50, 150, 'purple',3) // enemy speed
-const enemy5 = new Enemy(900 ,-500, 50, 150, 'orange',3) // enemy speed
-const enemy6 = new Enemy(1050 ,-500, 50, 50, 'yellow',3) // enemy speed
-const enemy7 = new Enemy(1050 ,-100, 50, 50, 'cyan',3) // enemy speed
+const enemy5 = new Enemy(900 ,-800, 50, 150, 'orange',3) // enemy speed
+const enemy6 = new Enemy(1050 ,-500, 50, 150, 'yellow',3) // enemy speed
+const enemy7 = new Enemy(1150 ,-700, 50, 150, 'cyan',3) // enemy speed
 const enemy8 = new Enemy(1050 ,-3000, 50, 350, 'lightpurple',3) // enemy speed
 const enemy9 = new Enemy(1050 ,-1000, 50, 350, 'gray',3) // enemy speed
 
@@ -478,8 +477,31 @@ return left && right && top && bottom
 
 resetBtn.addEventListener("click", function(){
 // console.log('reset btn clicked')
+gameActive = true
 
+// a reset button that resets everything to initial state
 
-
-
-})
+player1.x = 10
+player1.y = 125
+ enemy0.x = 100 
+ enemy0.y = -300
+ enemy1.x = 250  
+ enemy1.y = -200 
+ enemy2.x = 400 
+ enemy2.y =-400
+ enemy3.x = 550 
+ enemy3.y =-500
+ enemy4.x = 750 
+ enemy4.y = -800
+ enemy5.x = 900
+ enemy5.y = -800
+ enemy6.x = 1050
+ enemy6.y = -500
+ enemy7.x = 1150 
+ enemy7.y = -700 
+ enemy8.x = 1050
+ enemy8.y = -3000
+ enemy9.x = 1050
+ enemy9.y = -1000
+ })
+  
