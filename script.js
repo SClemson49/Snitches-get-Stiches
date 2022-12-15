@@ -1,4 +1,3 @@
-
 // console.log('linked!')
 const startBtn = document.querySelector('#start')
 const resetBtn = document.querySelector('#reset')
@@ -8,17 +7,11 @@ const playerOneName = document.querySelector('#bottom-left')
 const playerTwoName = document.querySelector('#bottom-right')
 const playerOneScore = document.querySelector('#playerOneScore')
 const playerTwoScore = document.querySelector('#playerTwoScore')
-
-
 canvas.setAttribute('height', getComputedStyle(canvas)['height'])
 canvas.setAttribute('width', getComputedStyle(canvas)['width'])
-
-
 // console.log(startBtn, resetBtn, canvas, timer)
-
 const context = canvas.getContext('2d')
 // console.log(context)
-
 // game objects classes
 class Player {
     constructor(x, y, width, height, color){
@@ -27,14 +20,12 @@ class Player {
         this.width = width
         this.height = height
         this.color = color
-        this.isPlaying = false
     }
     render() {
         context.fillStyle = this.color
         context.fillRect(this.x, this.y, this.width, this.height)
     }
 }
-
 class Enemy {
     constructor(x, y, width, height, color, movement){
         this.x = x
@@ -43,13 +34,11 @@ class Enemy {
         this.height = height
         this.color = color
         this.movement = movement
-
         // this.dx = 1 * this.movement // move left right
         this.dy = 1 * this.movement
     }
     render() {
         context.fillStyle = this.color
-        
         context.fillRect(this.x, this.y, this.width, this.height)
     }
     update(){
@@ -58,7 +47,6 @@ class Enemy {
        
     }      
 }
-
 class Goal {
     constructor(x, y, width, height, color){
         this.x = x
@@ -73,27 +61,19 @@ class Goal {
     }
 }
 
-
  // player units
 const gameLoopInterval = setInterval(gameLoop, 30)
 const goal = new Goal(1400, 135, 15, 15, 'yellow')
 
 const player1 = new Player(10, 125, 50, 50, 'blue')
-player1.isPlaying = true
 const player2 = new Player(10, 125, 50, 50, 'green')
 
 
 
 
 // start button - timer
-
-
-
-
 startBtn.addEventListener('click', function (){
-gameActive = true
-//  switchPlayer()
- var counter = 5; //CHANGE ROUND TIMER
+ var counter = 15; //CHANGE ROUND TIMER
  setInterval(function(){
             counter --
             if (counter >= 0){
@@ -106,18 +86,14 @@ gameActive = true
  }, 1000);
 })
 
-
 // boundries
-
     
-
 const pressedKeys = {}
-
 // user input to move
 function handleMovement() {
-    // if (!gameActive){
-    //     return}
-    
+    if (!gameActive){
+        return}
+
 const speed = 10
     if (pressedKeys.w) {
         player1.y -= speed
@@ -145,145 +121,114 @@ const speed = 10
     }
 }
 
-let currentPlayer = 'p1'
 
-// function switchPlayer(currentPlayer) {
-//     if (currentPlayer === 'p1') {
-//       currentPlayer = 'p2';
-     
-//     } else {
-//       currentPlayer = 'p1';
-   
-//     }
-// }
 
 document.addEventListener('keydown', e => pressedKeys[e.key] = true)
 document.addEventListener('keyup', e => pressedKeys[e.key] = false)
-
-
-
 //gameLoop -- GAME LOGIC --
 let gameActive = true
-
-//    if (currentPlayer === 'p1') {  
-//             context.clearRect(player1.x, player1.y, player1.width, player1.height)
-//               player2.render()
-//           } else {
-//             context.clearRect(player2.x, player2.y, player2.width, player2.height)
-//               player1.render()
-//           }
-    // player2.render()   
 function gameLoop(){
     context.clearRect(0,0, canvas.width, canvas.height)
-    if (player1.isPlaying){
-        player1.render()
-    } 
-    if (player2.isPlaying){
-        player2.render()
-    } 
-    handleMovement()
+        handleMovement()
 
-  
+
     // detect hit
     if (detectHit0()){
-        // gameActive = false
+        clearInterval(gameLoopInterval)
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        player1.isPlaying = !player1.isPlaying
-        player2.isPlaying = !player2.isPlaying
-        alert('you lose!')
-        console.log(currentPlayer)
-        
+
+
     }
     if (detectHit1()){
-        gameActive = false
+        clearInterval(gameLoopInterval)
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        switchPlayer()
-        
+
+
     }
     if (detectHit2()){
-        gameActive = false
+        clearInterval(gameLoopInterval)
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        switchPlayer()
-        
+
+
     }
     if (detectHit3()){
-        gameActive = false
+        clearInterval(gameLoopInterval)
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        switchPlayer()
-        
+
+
     }
     if (detectHit4()){
-        gameActive = false
+        clearInterval(gameLoopInterval)
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        switchPlayer()
-        
+
+
     }
     if (detectHit5()){
-        gameActive = false
+        clearInterval(gameLoopInterval)
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        switchPlayer()
-        
+
+
     }
     if (detectHit6()){
-        gameActive = false
+        clearInterval(gameLoopInterval)
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        switchPlayer()
-        
+
+
     }
     if (detectHit7()){
-        gameActive = false
+        clearInterval(gameLoopInterval)
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        switchPlayer()
-        
+
+
     }
     if (detectHit8()){
-        gameActive = false
+        clearInterval(gameLoopInterval)
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        switchPlayer()
-        
+
+
     }
     if (detectHit9()){
-        gameActive = false
+        clearInterval(gameLoopInterval)
         //end game
         console.log('game over')
         playerOneName.innerText = "Player one has died"
         timer.innerText = "YOU DIED" 
-        switchPlayer()
-        
+
+
     }
 
-        
-        
-    
+
+
+
     if (detectWin1()){
-        gameActive = false
+        clearInterval(gameLoopInterval)
         //end game
         console.log('WINNER')
         playerOneName.innerText = "Player One has caught the Snitch"
@@ -291,11 +236,11 @@ function gameLoop(){
        }
 
 
-        
 
-    
 
-    // player1.render()    
+
+
+    player1.render()    
     // player2.render()    
     enemy0.render()
     enemy1.render()
@@ -313,23 +258,23 @@ function gameLoop(){
 }
 
 //enemies
-const enemy0 = new Enemy(100 ,-300, 50, 150, 'red',4) // enemy speed
-const enemy1 = new Enemy(250 ,-100, 50, 50, 'black',3) // enemy speed
-const enemy2 = new Enemy(400 ,-200, 50, 350, 'white',2) // enemy speed
+const enemy0 = new Enemy(100 ,-300, 50, 150, 'red',3) // enemy speed
+const enemy1 = new Enemy(250 ,-200, 50, 150, 'black',3) // enemy speed
+const enemy2 = new Enemy(400 ,-400, 50, 350, 'white',3) // enemy speed
 const enemy3 = new Enemy(550 ,-500, 50, 150, 'pink',3) // enemy speed
-const enemy4 = new Enemy(750 ,-500, 50, 100, 'purple',3) // enemy speed
-const enemy5 = new Enemy(900 ,-550, 50, 150, 'orange',3) // enemy speed
+const enemy4 = new Enemy(750 ,-800, 50, 150, 'purple',3) // enemy speed
+const enemy5 = new Enemy(900 ,-500, 50, 150, 'orange',3) // enemy speed
 const enemy6 = new Enemy(1050 ,-500, 50, 50, 'yellow',3) // enemy speed
-const enemy7 = new Enemy(1100 ,-1000, 50, 75, 'cyan',2) // enemy speed
+const enemy7 = new Enemy(1050 ,-100, 50, 50, 'cyan',3) // enemy speed
 const enemy8 = new Enemy(1050 ,-3000, 50, 350, 'lightpurple',3) // enemy speed
 const enemy9 = new Enemy(1050 ,-1000, 50, 350, 'gray',3) // enemy speed
 
 const updateEnemy0 = function(){
 
-   
+
     requestAnimationFrame(updateEnemy0)
     enemy0.update();
-  
+
     if ( (this.y + this.width) > window.width){
     this.dy = -this.dy;
   }
@@ -338,10 +283,10 @@ updateEnemy0()
 
 const updateEnemy1 = function(){
 
-   
+
     requestAnimationFrame(updateEnemy1)
     enemy1.update();
-  
+
     if ( (this.y + this.width) > window.width){
     this.dy = -this.dy;
   }
@@ -350,10 +295,10 @@ updateEnemy1()
 
 const updateEnemy2 = function(){
 
-   
+
     requestAnimationFrame(updateEnemy2)
     enemy2.update();
-  
+
     if ( (this.y + this.width) > window.width){
     this.dy = -this.dy;
   }
@@ -362,10 +307,10 @@ updateEnemy2()
 
 const updateEnemy3 = function(){
 
-   
+
     requestAnimationFrame(updateEnemy3)
     enemy3.update();
-  
+
     if ( (this.y + this.width) > window.width){
     this.dy = -this.dy;
   }
@@ -374,10 +319,10 @@ updateEnemy3()
 
 const updateEnemy4 = function(){
 
-   
+
     requestAnimationFrame(updateEnemy4)
     enemy4.update();
-  
+
     if ( (this.y + this.width) > window.width){
     this.dy = -this.dy;
   }
@@ -386,10 +331,10 @@ updateEnemy4()
 
 const updateEnemy5 = function(){
 
-   
+
     requestAnimationFrame(updateEnemy5)
     enemy5.update();
-  
+
     if ( (this.y + this.width) > window.width){
     this.dy = -this.dy;
   }
@@ -398,10 +343,10 @@ updateEnemy5()
 
 const updateEnemy6 = function(){
 
-   
+
     requestAnimationFrame(updateEnemy6)
     enemy6.update();
-  
+
     if ( (this.y + this.width) > window.width){
     this.dy = -this.dy;
   }
@@ -410,10 +355,10 @@ updateEnemy6()
 
 const updateEnemy7 = function(){
 
-   
+
     requestAnimationFrame(updateEnemy7)
     enemy7.update();
-  
+
     if ( (this.y + this.width) > window.width){
     this.dy = -this.dy;
   }
@@ -422,10 +367,10 @@ updateEnemy7()
 
 const updateEnemy8 = function(){
 
-   
+
     requestAnimationFrame(updateEnemy8)
     enemy8.update();
-  
+
     if ( (this.y + this.width) > window.width){
     this.dy = -this.dy;
   }
@@ -434,10 +379,10 @@ updateEnemy8()
 
 const updateEnemy9 = function(){
 
-   
+
     requestAnimationFrame(updateEnemy9)
     enemy9.update();
-  
+
     if ( (this.y + this.width) > window.width){
     this.dy = -this.dy;
   }
@@ -530,5 +475,10 @@ function detectWin1(){
 return left && right && top && bottom
 }
 
+resetBtn.addEventListener("click", function(){
+// console.log('reset btn clicked')
+clearInterval(gameLoopInterval)
 
 
+
+})
