@@ -477,7 +477,7 @@ return left && right && top && bottom
 
 resetBtn.addEventListener("click", function(){
 // console.log('reset btn clicked')
-clearInterval(gameLoopInterval)
+
 
 
 

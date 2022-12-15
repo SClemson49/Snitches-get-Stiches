@@ -9,10 +9,9 @@
 
  ### MVP
  *  player one dodges enemies using WASD to reach the snitch at the end. 
- *   every time the snitch is caught, add enemies to the field. 
- *   switch players when player one is eliminated
- *   game is complete after a set (10?) amount of rounds, or when both players are eliminated
- *   score is based on time + snitch's caught (ex. 5.00mins + 10 = 150 pts)
+ *  Game is won when snitch it caught
+ *  Game is over when enemies are hit
+
 
 
 #### potential harships-- 
@@ -23,3 +22,9 @@
 * have the enemies start moving randomly, 'insane' mode
 * OR have the enemies start moving progressivly faster
 * endless mode
+* every time the snitch is caught, add enemies to the field.
+
+
+
+### Post project reflection:
+    I believe I set my expectations way too high for myself! I feel if I had picked a more obtainable game to create, I would have been more succesful in creating a finished product. Although I learned a lot, I am unhappy with the game as is, but there is always room for improvement. 
